@@ -1,7 +1,5 @@
 # install.packages(c("httr", "dplyr", "readr", "lubridate", "ggplot2"))
 
-setwd("/Users/nkalligeris/Documents/NOA/projects/Geo-Inquire/Github_page/examples/dakar")
-
 library(httr)
 library(readr)
 library(dplyr)
