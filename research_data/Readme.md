@@ -40,11 +40,11 @@ The sea level data streaming script is designed to transfer data from the MSSQL 
 
 Retrieval from SLSMF, selection of preferred sensor and QC calculations. An overview of the SLSMF QC data flow and its main/individual components is provided in Fig. 1-2. For an overview of all arguments use \--help.
 
-![](media/image1.png)
+![](../media/image1.png)
 
 **Figure 1**. The SLSMF QC data flow in simple steps shown on the left column and input/output data are shown on the right column.
 
-![](media/image2.png)
+![](../media/image2.png)
 
 **Figure 2**. The main/individual components of the SLSMF QC data flow.
 
@@ -226,11 +226,11 @@ Number of distinct values for a day / number of values for that day.
 
 Example provided for the radar (*rad*) sensor of the Diego Garcia tide gauge station (SSC-garc) in January of year 2023 - see Fig. 3-4 and example folder named "garc". The sea level data for the first nine days of the month include flatlines that are partially detected by the flatlines algorithm (blue dots in Fig. 3). Regardless of the partial flatlines detection, the data for the first nine days were discarded either due to shifts or low distinctness (distinctness below the 10% threshold) - note that the distinctness check is performed prior to the application of the flatlines algorithm. The quality-controlled sea level data start from January 11th, 2023, due to a shift being detected on January 10th after the flatline ends, and the data for that day being discarded (Fig. 4).
 
-![](Examples/garc/spikes_via_median_garc_rad_88_2023-01-01_values_lines.png)
+![](../Examples/garc/spikes_via_median_garc_rad_88_2023-01-01_values_lines.png)
  
 **Figure 3.** Distinctness example presented through sea level data of the *rad* sensor of the SSC-garc station for January 2023; the labels at the bottom of the chart flag whether a low distinctness or shift is detected within a day, and/or the days for which the sensor is preferred compared to the other available sensors of the particular station, if any.
 
-![](media/image4.png)
+![](../media/image4.png)
 
 **Figure 4.** Distinctness example presented through sea level data of the *rad* sensor of the SSC-garc station for January 2023: relative sea level data after QC.
 
@@ -278,11 +278,11 @@ For values with an occurrence higher than a threshold, we determine if the value
 
 Example provided for the 2nd radar (*ra2*) sensor of the Mar del Plata tide gauge station (SSC-plat) in January of year 2023 - see Fig. 5-6 and example folder named "plat". The two flatline events on January 9-10th have equal values throughout and are detected (Fig. 5). The flatline event on January 6-7th protruding from the time series is split in four individual flatlines with equal values (Fig. 5), all of which are detected by the algorithm and are subsequently removed in the quality-controlled sea level time series (see Fig. 6, where flatlines have been replaced with data gaps).
 
-![](media/image5.png)
+![](../media/image5.png)
 
 **Figure 5.** Flatline example presented through sea level data of the *ra2* sensor of the SSC-plat station for January 2023.
 
-![](media/image6.png)
+![](../media/image6.png)
 
 **Figure 6.** Flatline example presented through sea level data of the *ra2* sensor of the SSC-plat station for January 2023: relative sea level data after QC.
 
@@ -330,11 +330,11 @@ detected exceeding neighbours (green dots) and spikes (orange dots). All
 these instances are removed from the quality-controlled sea level time
 series (Fig. 8).
 
-![](Examples/gibr3/out_of_range_gibr3_pr1_2461_2023-01-01_values_lines.png)
+![](../Examples/gibr3/out_of_range_gibr3_pr1_2461_2023-01-01_values_lines.png)
  
 **Figure 7.** Out-of-range example presented through sea level data of the *pr1* sensor of the SSC-gibr station for January 2023.
 
-![](media/image8.png)
+![](../media/image8.png)
 
 **Figure 8.** Out-of-range example presented through sea level data of the *pr1* sensor of the SSC-gibr station for January 2023: relative sea level data after QC.
 
@@ -391,12 +391,12 @@ Compare the MSL of the day against the 90th and 10th quantiles of sea level data
 Example provided for the pressure (*prt*) sensor of the DART Tonga station (SSC-dnzf) in August of year 2022 - see Fig. 9-10 and example folder named "dnzf". The clear shift in the data is detected, as indicated though the bottom labels of Fig. 9. The shift detected on the first available sea level data after the shift, namely on 11th of August, 2022, is discarded, and the sea level data from the next day on (from the 12th of August, 2022) is returned to the user (Fig. 10). Possible
 shifts from the 12th of August on are based on sea level data starting from the 12th of August until the moon-month period is exceeded, or from a later day if another shift is detected within the moon-month.
 
-![](Examples/dnzf/shift_dnzf_prt_3059_2022-08-01_values_lines.png)
+![](../Examples/dnzf/shift_dnzf_prt_3059_2022-08-01_values_lines.png)
  
 **Figure 9.** Shift detection example
 presented through sea level data of the *prt* sensor of the SSC-dnzf DART Tonga station for August 2022; the labels at the bottom of the chart flag whether a low distinctness or shift is detected within a day, and/or the days for which the sensor is preferred compared to the other available sensors of the particular station, if any.
 
-![](media/image10.png)
+![](../media/image10.png)
  
 **Figure 10.** Shift detection example presented through sea level data of the *prt* sensor of the SSC-dnzf DART Tonga station for August 2022: zoom-in around the detected shift, showing the relative sea levels before (red-dashed lines) and after (black-continuous lines) QC.
 
@@ -460,7 +460,7 @@ neighbours.
     - In groups of other sizes (see Fig. 11): points outside the interval are marked as exceeding neighbours. This interval is defined as the local median of 10 points left and right from this group +/- (*max\_diff\_either\_neighbours* / 2).
 - Detect blunt spikes: if 2 points are marked as exceeding neighbours and are a distance of *max\_distance\_to\_fill* points between each other, also mark the points in between. The start and end of gaps are not marked as exceeding neighbours
 
-![](media/image11.png)
+![](../media/image11.png)
 
 **Figure 11**. Theoretical example of a group of 5 points initially
 marked as exceeding neighbours, of which 2 are ignored because they are
@@ -476,11 +476,11 @@ within a certain distance to the local median.
 
 Example provided for the pressure (*prs*) sensor of the La Libertad station (SSC-lali) in January of year 2023 - see Fig. 12-13 and example folder named "lali". Multiple instances of detected exceeding neighbours sea level points are marked on Fig. 12 (green dots), together with detected spikes (orange dots). All these instances are removed from the quality-controlled sea level time series (Fig. 13).
 
-![](Examples/lali/exceeded_neighbours_lali_prs_189_2023-01-01_values_lines.png)
+![](../Examples/lali/exceeded_neighbours_lali_prs_189_2023-01-01_values_lines.png)
 
 **Figure 12.** Exceeding neighbours detection example presented through sea level data of the *prs* sensor of the SSC-lali station for January 2023.
 
-![](media/image13.png)
+![](../media/image13.png)
 
 **Figure 13.** Exceeding neighbours detection example presented through sea level data of the *prs* sensor of the SSC-lali station for January 2023: relative sea level data after QC.
 
@@ -534,11 +534,11 @@ The spike detection algorithm should not be applied for accessing quality-contro
 
 Example provided for the pressure (*prs*) sensor of the Dakar station (SSC-dakar) in January of year 2023 - see Fig. 14-15 and example folder named "dakar". Multiple instances of detected spikes are marked on Fig. 14 (orange dots), together with detected exceeding neighbours (green dots). All these instances are removed from the quality-controlled sea level time series (Fig. 15). It should be noted that smaller spikes are still present in the quality-controlled sea level time series, which were not detected by the spike detection algorithm (see inset of Fig. 15).
 
-![](Examples/dakar/spikes_via_median_dakar_prs_74_2023-01-01_values_lines.png)
+![](../Examples/dakar/spikes_via_median_dakar_prs_74_2023-01-01_values_lines.png)
 
 **Figure 14.**
 Spike detection example presented through sea level data of the *prs* sensor of the SSC-dakar station for January 2023.
 
-![](media/image15.png)
+![](../media/image15.png)
 
 **Figure 15.** Spike detection example presented through sea level data of the *prs* sensor of the SSC-dakar station for January 2023: relative sea level data after QC.
