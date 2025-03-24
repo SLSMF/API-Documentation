@@ -29,14 +29,9 @@ A description of the sea level data streaming/retrieval design and Quality Contr
 
 ### API access examples 
 
-- A Jupyter notebook is provided through the file [SLSMF\_API\_access\_example](SLSMF_API_access_example.ipynb), explaining the steps involved in accessing sea level data through the new SLSMF API web-service. The notebook breaks down the user inputs though R code and directly visualises the output sea level time series. It acts as a hands-on guide, allowing users to better understand the integration of the API into their workflows and the types of operations it supports. The notebook needs to be downloaded and run locally.
+- A Jupyter notebook is provided through the file [SLSMF\_API\_access\_example](SLSMF_API_example.ipynb), explaining the steps involved in accessing sea level data through the new SLSMF API web-service. The notebook breaks down the user inputs though R code and directly visualises the output sea level time series. It acts as a hands-on guide, allowing users to better understand the integration of the API into their workflows and the types of operations it supports. The notebook needs to be downloaded and run locally.
 - A collection of code examples using both MATLAB and R programming languages, demonstrating the various functionalities of the API web-service in line with the QC\_steps\_description document, can be found in the folder [Examples](Examples). These code samples are designed to provide users with practical illustrations of how the API can be used in different scenarios, showcasing its capabilities for retrieving, processing, and analyzing sea level data. 
 
 ## Project information
 
 This repository was prepared within Task 2.5 "Virtual access to sea level data" of the Horizon Europe project Geo-INQUIRE ([https://doi.org/10.3030/101058518](https://doi.org/10.3030/101058518)). It is a collaborative work between the National Observatory of Athens ([NOA](http://www.noa.gr/en)), Greece, and the Flanders Marine Institute ([VLIZ](http://www.vliz.be/en)), Belgium.
-
-
-
-
-
