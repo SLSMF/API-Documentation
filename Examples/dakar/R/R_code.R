@@ -76,7 +76,7 @@ for (i in 1:no_of_pages) {
   response <- GET(url, add_headers(`X-Api-Key` = api_key, Accept = 'text/csv'))
   
   # Writing the output file(s)
-  writeLines(content(response, "text"), con = paste0('SLSMF_tg_data_pg', page, '.txt'))
+  data.table::fwrite(list(content(response, "text")), file = paste0('SLSMF_tg_data_pg', page, '.txt'), quote=F)
   
   # Read the tables back
   if (i == 1) {
