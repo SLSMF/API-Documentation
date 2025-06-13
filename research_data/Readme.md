@@ -57,6 +57,7 @@ It is aimed for every bucket to be calculated once, as measurements in the SLSMF
 Because the API of the SLSMF has a 30-day (or 150,000 values) limit, the necessary steps are followed to provide data for larger periods or sensors with a higher than 1 minute frequency. For the latter, a smaller than 30-day window needs to be used that facilitates initial or bulk loading of daily buckets. When the script is run for a specific SLMSF station, an extrapolation will happen to all sensors linked to the same SSC-id to make sure later steps will always be calculated on all available data for a physical station.
 
 #### Steps
+All Quality control codes can be found in this [GITHUB repository](https://github.com/SLSMF/automatic_quality_control).
 
 -   Metadata for station-sensor - aggregation of three endpoints:
 
