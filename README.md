@@ -14,7 +14,7 @@ was launched by VLIZ in the spring of 2025 using the Slim Framework which allows
 
 This repository aims to guide the users of the new SLSMF API web-service in:
 
-- understaning the API functionalities, sea level data streaming/retrieval, and Quality Control (QC) steps performed in the web-service,
+- understanding the API functionalities, sea level data streaming/retrieval, and Quality Control (QC) steps performed in the web-service,
 - accessing quality-controlled sea level data through the service.
 
 Below is a breakdown of the material that can be found in the repository.

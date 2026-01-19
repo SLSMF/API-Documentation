@@ -49,11 +49,11 @@ The station code referenced in the query corresponds to the IOC code listed in t
 
 Sensor \[*string*\]
 
-**One sensor**: This option will return data from a single sensor type for the **entire specified period**. When the *includesensors* field is left empty the sensor chosen will be the one that was set as preferred for most of the days during the requested time frame. But if sensors are added to the *includesensors* field, the sensor with the highest number of preferred days from this selection will be returned. Thus when only one sensor is added to the *includesensors*, data will be returned for that sensor.
+**One sensor**: This option will return data from a single sensor type for the **entire specified period**. When the *includesensors* field is left empty the sensor chosen will be the one that was set as preferred for most of the days during the requested time frame. But if sensors are added to the *includesensors* field, the sensor with the highest number of preferred days from this selection will be returned. Thus when only one sensor is added to the *includesensors*, data will be returned for that sensor. If no sensor is preferred in the specified period, then a random sensor is picked.
 
-For a physical station (Catalog Id), the preferred sensor is the one selected with the best performance for a given time frame after the fast QC.
+For a physical station (Catalog Id), the preferred sensor is the one selected with the best performance for a given time frame after the fast QC. Each day, only one sensor can be preferred.
 
-**Alternate sensor**: This option returns data from multiple sensors, **different per day**. The preferred sensor for each individual day will be returned, if there are no selected sensors in the *includesensors* field. But when sensors are added to the *includesensors* field, the sensors in the result will be filtered by this selection.
+**Alternate sensor**: This option returns data from multiple sensors, **different per day**. The preferred sensor for each individual day will be returned, if there are no selected sensors in the *includesensors* field. But when sensors are added to the *includesensors* field, the sensors in the result will be filtered by this selection. It could be that none of the selected sensors is preferred for the period. For this endpoint it is interesting to align the different sensors using *level_data*.
 
 If no preferred sensor is available on a given day, no data will be returned for that day.
 
@@ -76,14 +76,14 @@ In the header of the file the following info is provided for the paging of the d
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | 30 | 2 | 3 | 2 | 1 | Time of request |
   -----------------------------------------------------------------------
-  
+
 Timestart \[*string*\]
 
-The starting date is the beginning of the time period for which data is being requested, marking the initial date of the desired data range (this date is included in the results).
+The starting date is the beginning of the time period for which data is being requested, marking the initial date of the desired data range (this date is included in the results). Format is 'YYYY-MM-DD'.
 
 Timestop \[*string*\]
 
-The ending date is the last date of the time period for which data is being requested, marking the final date in the specified data range (this date is not included in the results). When the Timestop equals the current date, real time data will be added for the current day. The data will be from the sensor which was selected the most as preferred during the whole period, taking the include sensors field into account.
+The ending date is the last date of the time period for which data is being requested, marking the final date in the specified data range (this date is not included in the results). When the Timestop equals the current date, real time data will be added for the current day. The data will be from the sensor which was selected the most as preferred during the whole period, taking the include sensors field into account. Format is 'YYYY-MM-DD'.
 
 Includesensors \[*multiple stings*\]
 
@@ -108,7 +108,6 @@ Available types:
 | *aqu* | Aquatrak (brand) |
 | *bub* | bubbler |
 | *bub1*| 1st bubbler |
-| *prd* | predicted tide |
 | *ecs* | acoustic echo sounder |
 | *ec2* | 2nd acoustic echo sounder |
 | *wls* | water level sensor |
@@ -116,52 +115,70 @@ Available types:
 | *bwl* | backup water level |
 | *flt* | float |
 | *stp* | Etrometa step gauges |
-| *sw1* | 1st switch |
-| *sw2* | 2nd switch |
-| *bat* | battery - not available in research data |
-| *atm* | atmospheric pressure |
 | *prt* | pressure tsunami - dart |
 | *prte*| pressure tsunami event - dart - Always added to prt sensor if available |
   -----------------------------------------------------------------------
 
 Also, check the interaction between Sensors and Includesensors option, described under Sensors.
 
-level data \[*Boolean*\]
+level_data \[*Boolean*\]
 
-Options: true / false. The requested data will be recalculated in reference to the mean sea level of the last 30 days. Enabling this option (setting it to "True") is highly recommended when requesting
+Options: true / false. The requested data will be recalculated in reference to the mean sea level of the last 30 days. Enabling this option (setting it to "True") is highly recommended when requesting (is it still highly recommended?)
 data from alternate sensors. This ensures consistency and prevents discrepancies or shifts in the data, when transitioning between different sensors.
 
-original\_stime \[*Boolean*\]
+flag_qc \[*Boolean*\]
+
+Options: true / false. Show extra columns with qc flags.
+
+fit_to_sample_interval \[*Boolean*\]
 
 Options: true / false.
 
-(True) Obtain the data at the specific rate or frequency defined by the station. This means that the data will be provided according to the station's predefined sampling rates.
+(True) Organize the data into predefined time slots based on the transmission rate, essentially normalizing the data to ensure it aligns with the established intervals. This is done by rounding down timestamps to the nearest fixed time intervals, and by adding missing records with slevel = NA. This process adjusts the data to fit consistent, standardized time periods, ensuring that it is uniformly distributed according to the rate at which it was transmitted or recorded.
 
-(False) Organize the data into predefined time slots based on the transmission rate, essentially normalizing the data to ensure it aligns with the established intervals. This process adjusts the data to fit consistent, standardized time periods, ensuring that it is uniformly distributed according to the rate at which it was transmitted or recorded.
+(False) Obtain the data at the specific rate or frequency defined by the station. This means that the data will be provided according to the station's predefined sampling rates.
 
 **Quality control filters**
 
+These filters are based on quality parameters and they never remove date points, only remove the sea level value in column slevel to NA (not available). To see which filter removed the sea level set *flag_qc* to true, so the quality parameter flags are shown for each data point. The flag(s) with "T" (true) mean the data point is flagged for this parameter. This usually means the data point is bad.
+
+filter\_completeness \[*Boolean*\]
+
+Options: true / false. This filter ensures the data has enough completeness, by setting slevel column to NA for days that are flagged as low 'completeness', meaning it has less than 30% of the expected data points in a day, based on sample rate
+
+filter\_distinctness \[*Boolean*\]
+
+Options: true / false. This filter ensures the data has enough distinctness, by setting slevel column to NA for days that are flagged as having a vertical 'shift'. Sea levels have a minimum distinctness in a day.
+
+
+filter\_shift \[*Boolean*\]
+
+Options: true / false. This filter ensures the vertical shifts are removed, by setting slevel column to NA days that are flagged as having a 'shift', meaning the median sea level of the day is outside the 0.1 and 0.9 quantile range of the sea levels in the previous month or until last shift.
+
+
 filter\_out\_of\_range \[*Boolean*\]
 
-Options: true / false. This filter eliminates data points that are significantly higher or lower than the majority of the values within a specified time period. It is designed to identify and remove outliers or anomalies, ensuring that the remaining data more accurately represents typical trends and patterns for that particular time frame.
+Options: true / false. This filter sets slevel to NA for data points that are significantly higher or lower than the majority of the values within a specified time period. It is designed to identify and remove outliers or anomalies, ensuring that the remaining data more accurately represents typical trends and patterns for that particular time frame.
 
 filter\_exceeded\_neighbours \[*Boolean*\]
 
 Options: true / false. This filter works by comparing the difference between adjacent sea level data points. If the difference between a specific data point and its neighboring values exceeds a defined
-threshold, that data point is removed. This helps eliminate abrupt, unusual fluctuations that may not align with the general trend of the surrounding data. Caution should be exercised when using this filter for tsunami events, as the initial tsunami signal may be incorrectly identified as an outlier due to exceeding the neighboring data points.
+threshold, its slevel column is set to NA. This helps eliminate abrupt, unusual fluctuations that may not align with the general trend of the surrounding data. Caution should be exercised when using this filter for tsunami events, as the initial tsunami signal may be incorrectly identified as an outlier due to exceeding the neighboring data points.
 
 filter\_spikes\_via\_median \[*Boolean*\]
 
-Options: true / false. This filter removes data points that deviate substantially from a spline-fit curve, which is a smooth, flexible curve that models the underlying trend of the data. By identifying and removing points that significantly differ from this curve, the filter helps to retain only those data points that are consistent with the overall trend, improving the accuracy and reliability of the dataset.
+Options: true / false. This filter sets the slevel to NA of data points that deviate substantially from a spline-fit curve, which is a smooth, flexible curve that models the underlying trend of the data. By identifying and removing points that significantly differ from this curve, the filter helps to retain only those data points that are consistent with the overall trend, improving the accuracy and reliability of the dataset.
 
 filter\_flat\_line \[*Boolean*\]
 
 Options: true / false. This filter addresses data gaps that appear as flat, unchanging segments in the data diagrams, typically indicating periods where no data was recorded or the data was unavailable. By removing these flat-line sections, the filter helps to clean the dataset, ensuring that only continuous, meaningful data is retained for analysis and that gaps in the data do not distort the overall trends or patterns.
 
-Media type \[*text/csv - application/json*\]
 
-In this section, you have the option to choose the format in which you would like the requested data to be delivered. The dropdown menu provides two available choices: you can either receive the data in text format, where values are separated by commas, or in JSON format, which is a structured data format commonly used for representing information in key-value pairs.
+**Media type**
 
+Options \[*text/csv - application/json*\]
+
+In this section, you have the option to choose the format in which you would like the requested data to be delivered. The dropdown menu provides two available choices: you can either receive the data in text format, where values are separated by commas, or in JSON format, which is a structured data format commonly used for representing information in key-value pairs. After pressing "Execute", the data is fetched into a file, which can then be downloaded by pressing "Download file".
 More details about the function of the QC filters can be found in the [QC\_steps\_description](research_data/) file.
 
 **<ins>Future work</ins>: description of all available endpoints, i.e. station, sensor, operator and catalog.**

@@ -40,6 +40,10 @@ The sea level data streaming script is designed to transfer data from the MSSQL 
 
 Retrieval from SLSMF, selection of preferred sensor and QC calculations. An overview of the SLSMF QC data flow and its main/individual components is provided in Fig. 1-2. For an overview of all arguments use \--help.
 
+This cascading flow chart shows for each left block a calculation step and if used, and what criteria will be used for further filtering. Each arrow is the filtering step itself, where some sea level data is removed. Better quality data is then used as input for the next step. The right blocks show what the input and output data is. <br />
+Fast qc starts with calculation of four qc parameters (exceeding neighbours, flat lines, distinctness and completeness) on all data, which means raw data and per period of 1 year. Distinctness and completeness are calculated on a resolution of one day and are stored as a double, for which a cutoff point for bad data is applied later on. <br />
+For the calculation of "out of range", as input
+
 ![](../media/image1.png)
 
 **Figure 1**. The SLSMF QC data flow in simple steps shown on the left column and input/output data are shown on the right column.
@@ -152,9 +156,9 @@ Steps involved in the QC process:
 
 -   Shift detection
 
-    -   A shift is detected in data when the average of the day is as high or as low as the 90th or 10th quantile, respectively, based on prior sea level data (either for moon-month or to the previous detected shift).
+    -   A vertical shift is detected in data when the average of the day is as high or as low as the 90th or 10th quantile, respectively, based on prior sea level data (either for moon-month or to the previous detected shift).
 
-    -   The days with shift are not returned in the dataset.
+    -   The days with vertical shift are not returned in the dataset.
 
     -   When the mean sea level is calculated for the levelling of data, the data of the last moon month will be used or until a shift date is reached. Resulting in nicely aligned levelled data.
 
