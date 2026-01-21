@@ -63,7 +63,7 @@ The following examples illustrate the functionality of this parameter, in combin
 
 Days per page \[*Integer*\]
 
-Maximum number of days included in a page (i.e. a single file to download) (max 3650 days).
+Maximum number of days included in a page (i.e. a single file to download) (max 365 days).
 
 Page \[*Integer*\]
 

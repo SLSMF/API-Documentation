@@ -147,3 +147,4 @@ notebook/templates/*.html
 .pixi
 *.egg-info
 
+.Rproj.user
