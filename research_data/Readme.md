@@ -40,9 +40,8 @@ The sea level data streaming script is designed to transfer data from the MSSQL 
 
 Retrieval from SLSMF, selection of preferred sensor and QC calculations. An overview of the SLSMF QC data flow and its main/individual components is provided in Fig. 1-2. For an overview of all arguments use \--help.
 
-This cascading flow chart shows for each left block a calculation step and if used, and what criteria will be used for further filtering. Each arrow is the filtering step itself, where some sea level data is removed. Better quality data is then used as input for the next step. The right blocks show what the input and output data is. <br />
+This cascading flow chart shows for each left block a calculation step and what criteria will be used for further filtering. Each arrow is a filtering step, where some sea level data is removed. Better quality data is then used as input for the next step. The right blocks show what the input and output data is. <br />
 Fast qc starts with calculation of four qc parameters (exceeding neighbours, flat lines, distinctness and completeness) on all data, which means raw data and per period of 1 year. Distinctness and completeness are calculated on a resolution of one day and are stored as a double, for which a cutoff point for bad data is applied later on. <br />
-For the calculation of "out of range", as input
 
 ![](../media/image1.png)
 

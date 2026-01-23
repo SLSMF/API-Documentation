@@ -22,7 +22,7 @@ end_date <- '2023-02-01'  # until date, not included in result. Default is day o
 includesensors <- 'pr1'
 level_data <- 'true' # Level data relative to the mean sea level of 30 days.
 flag_qc <- 'true' # show qc flags
-fit_sample_interval <- 'true' # Return the stime not corrected by sensor rate.
+fit_to_sample_rate <- 'true' # Return the stime not corrected by sensor rate.
 filter_out_of_range <- 'true' # Set slevel to NA for records with out of range values\n,
 filter_exceeded_neighbours <- 'true' # Set slevel to NA for records with exceeded neighbour values\n,
 filter_spikes_via_median <- 'true' # Set slevel to NA for records with spikes via median values\n,
@@ -57,7 +57,7 @@ for (i in 1:no_of_pages) {
                   '&includesensors[]=', includesensors,
                   '&level_data=', level_data,
                   '&flag_qc=', flag_qc,
-                  '&fit_sample_interval=', fit_sample_interval,
+                  '&fit_to_sample_rate=', fit_to_sample_rate,
                   '&filter_out_of_range=', filter_out_of_range,
                   '&filter_exceeded_neighbours=', filter_exceeded_neighbours,
                   '&filter_spikes_via_median=', filter_spikes_via_median,
@@ -73,7 +73,7 @@ for (i in 1:no_of_pages) {
                   '&timestop=', end_date,
                   '&level_data=', level_data,
                   '&flag_qc=', flag_qc,
-                  '&fit_sample_interval=', fit_sample_interval,
+                  '&fit_to_sample_rate=', fit_to_sample_rate,
                   '&filter_out_of_range=', filter_out_of_range,
                   '&filter_exceeded_neighbours=', filter_exceeded_neighbours,
                   '&filter_spikes_via_median=', filter_spikes_via_median,

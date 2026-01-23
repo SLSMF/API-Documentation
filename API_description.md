@@ -123,7 +123,7 @@ Also, check the interaction between Sensors and Includesensors option, described
 
 level_data \[*Boolean*\]
 
-Options: true / false. The requested data will be recalculated in reference to the mean sea level of the last 30 days. Enabling this option (setting it to "True") is highly recommended when requesting (is it still highly recommended?)
+Options: true / false. The requested data will be recalculated in reference to the mean sea level of the last 30 days.
 data from alternate sensors. This ensures consistency and prevents discrepancies or shifts in the data, when transitioning between different sensors.
 
 flag_qc \[*Boolean*\]
