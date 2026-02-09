@@ -53,7 +53,7 @@ Sensor \[*string*\]
 
 For a physical station (Catalog Id), the preferred sensor is the one selected with the best performance for a given time frame after the fast QC. Each day, only one sensor can be preferred.
 
-**Alternate sensor**: This option returns data from multiple sensors, **different per day**. The preferred sensor for each individual day will be returned, if there are no selected sensors in the *includesensors* field. But when sensors are added to the *includesensors* field, the sensors in the result will be filtered by this selection. It could be that none of the selected sensors is preferred for the period. For this endpoint it is interesting to align the different sensors using *level_data*.
+**Alternate sensor**: This option returns data from multiple sensors, **different per day**. The preferred sensor for each individual day will be returned, if there are no selected sensors in the *includesensors* field. But when sensors are added to the *includesensors* field, the sensors in the result will be filtered by this selection. It could be that none of the selected sensors is preferred for the period. For this endpoint it is interesting to align the different sensors using *substract_30d_average*.
 
 If no preferred sensor is available on a given day, no data will be returned for that day.
 
@@ -121,7 +121,7 @@ Available types:
 
 Also, check the interaction between Sensors and Includesensors option, described under Sensors.
 
-level_data \[*Boolean*\]
+substract_30d_average \[*Boolean*\]
 
 Options: true / false. The requested data will be recalculated in reference to the mean sea level of the last 30 days.
 data from alternate sensors. This ensures consistency and prevents discrepancies or shifts in the data, when transitioning between different sensors.
