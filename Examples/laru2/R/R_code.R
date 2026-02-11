@@ -71,7 +71,7 @@ for (i in 1:no_of_pages) {
                   '&page=', page,
                   '&timestart=', start_date,
                   '&timestop=', end_date,
-                  '&substract_30d_average=', level_data,
+                  '&substract_30d_average=', substract_30d_average,
                   '&flag_qc=', flag_qc,
                   '&fit_to_sample_rate=', fit_to_sample_rate,
                   '&filter_out_of_range=', filter_out_of_range,
