@@ -22,7 +22,7 @@ end_date <- '2022-09-01'  # until date, not included in result. Default is day o
 includesensors <- 'prt'
 subtract_30d_average <- 'true' # Level data relative to the mean sea level of 30 days.
 flag_qc <- 'true' # show qc flags
-fit_to_sample_rate <- 'true' # Return the stime not corrected by sensor rate.
+fit_to_sample_rate <- 'false' # Return the stime not corrected by sensor rate.
 filter_out_of_range <- 'true' # Set slevel to NA for records with out of range values\n,
 filter_exceeded_neighbours <- 'true' # Set slevel to NA for records with exceeded neighbour values\n,
 filter_spikes_via_median <- 'true' # Set slevel to NA for records with spikes via median values\n,
