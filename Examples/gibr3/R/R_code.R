@@ -20,7 +20,7 @@ days_per_page <- 360  # maximum number of days spanning a page, max 365 days
 start_date <- '2023-01-01'  # from date, included in result. Default is 8days in the past, 'YYYY-MM-DD'
 end_date <- '2023-02-01'  # until date, not included in result. Default is day of request 'YYYY-MM-DD'
 includesensors <- 'pr1'
-substract_30d_average <- 'true' # Level data relative to the mean sea level of 30 days.
+subtract_30d_average <- 'true' # Level data relative to the mean sea level of 30 days.
 flag_qc <- 'true' # show qc flags
 fit_to_sample_rate <- 'true' # Return the stime not corrected by sensor rate.
 filter_out_of_range <- 'true' # Set slevel to NA for records with out of range values\n,
@@ -55,7 +55,7 @@ for (i in 1:no_of_pages) {
                   '&timestart=', start_date,
                   '&timestop=', end_date,
                   '&includesensors[]=', includesensors,
-                  '&substract_30d_average=', substract_30d_average,
+                  '&subtract_30d_average=', subtract_30d_average,
                   '&flag_qc=', flag_qc,
                   '&fit_to_sample_rate=', fit_to_sample_rate,
                   '&filter_out_of_range=', filter_out_of_range,
@@ -71,7 +71,7 @@ for (i in 1:no_of_pages) {
                   '&page=', page,
                   '&timestart=', start_date,
                   '&timestop=', end_date,
-                  '&substract_30d_average=', substract_30d_average,
+                  '&subtract_30d_average=', subtract_30d_average,
                   '&flag_qc=', flag_qc,
                   '&fit_to_sample_rate=', fit_to_sample_rate,
                   '&filter_out_of_range=', filter_out_of_range,
